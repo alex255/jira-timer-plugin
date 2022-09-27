@@ -1,0 +1,56 @@
+{
+  "name": "nxTracker",
+  "version": "1.0",
+  "description": "Helps tracking work for jira users.",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "storage",
+    "tabs",
+    "management"
+  ],
+  "background": {
+    "scripts": [ 
+      "lib/moment.min.js",
+      "lib/moment-duration-format.min.js",
+      "background/utils.js",
+      "background/jira-api.js",
+      "background/work-log.js",
+      "background/main.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [{
+    "matches": ["https://nexiuslearning.atlassian.net/*"],
+    "css": [
+      "styles/material-icons.css",
+      "styles/track-control.css"
+    ],
+    "js": [
+      "lib/jquery-3.5.0.min.js",
+      "lib/moment.min.js",
+      "lib/moment-duration-format.min.js",
+      "content/utils.js",
+      "content/track-control.js",
+      "content/focus-control.js",
+      "content/copy-work-log.js",
+      "content/save-tracking.js"
+    ]
+  }],
+  "web_accessible_resources": [
+    "webfonts/MaterialIcons-Regular.eot",
+    "webfonts/MaterialIcons-Regular.ttf",
+    "webfonts/MaterialIcons-Regular.woff",
+    "webfonts/MaterialIcons-Regular.woff2"
+  ],
+  "icons": {
+    "16": "images/on-16.png",
+    "48": "images/on-48.png",
+    "128": "images/on-128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/off-48.png",
+    "default_popup": "popup/index.html",
+    "default_title": "nxTracker"
+  },
+  "manifest_version": 2
+}

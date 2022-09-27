@@ -1,0 +1,24 @@
+
+.track-ctrl, .focus-ctrl {
+    cursor: pointer;
+}
+.header-ctrl {
+    vertical-align: bottom;
+    font-size: 28px;
+}
+.summary-ctrl {
+    font-size: 20px;
+}
+.ghx-ctrl {
+    font-size: 22px;
+    line-height: 18px;
+    vertical-align: text-top;
+}
+#tracking.ghx-ctrl {
+    margin-left: 5px;
+}
+
+.track-duration {
+    margin-top: 28px;
+    display: inline-block;
+}

@@ -1,0 +1,27 @@
+
+.focused-parent, .focused-subtask {
+    display: flex;
+    align-items: center;
+}
+.focused-parent {
+    font-weight: bold;
+    background-color: var(--inverse-bg-color);
+    color: var(--bg-color);
+}
+.parent-content {
+    flex: 1 1 auto;
+    max-width: 280px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.focused-subtask {
+    position: relative;
+    padding: 5px 0 5px 19px;
+    line-height: 1.1;
+    border-bottom: 1px solid var(--fg-color);
+}
+.set-current-btn {
+    position: absolute;
+    left: 0;
+}

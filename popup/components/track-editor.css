@@ -1,0 +1,73 @@
+.track-editor-container {
+    position: relative;
+}
+.track-edit-btn {
+    position: absolute;
+    top: -20px;
+    left: 0px;
+}
+.track-edit-btn .material-icons {
+    padding: 2px 3px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+/* dynamically change icon with class */
+/* for content codes refer to: https://github.com/google/material-design-icons/blob/master/iconfont/codepoints */
+.track-edit-btn .material-icons::before {
+    font-family: "Material Icons"; content: "\E150"; /* edit */
+}
+.read-only .track-edit-btn .material-icons::before {
+    font-family: "Material Icons"; content: "\E5d4"; /* more_vert */
+}
+.ctrlDown .track-edit-btn .material-icons::before { 
+    font-family: "Material Icons"; content: "\E14C"; /* clear */
+}
+
+.track-editor-container.for-current .track-edit-btn {
+    left: auto;
+    right: 0px;
+}
+.track-editor-container.for-current .track-save-btn,
+.track-editor-container.for-current .track-clear-btn {
+    order: 1;
+    margin-right: 0;
+    margin-left: 5px;
+}
+
+.track-edit-btn.active .material-icons {
+    background-color: var(--edit-bg-color);
+}
+.track-editor-form {
+    margin-top: 5px;
+    padding: 5px 3px;
+    background-color: var(--edit-bg-color);
+}
+
+.edit-line { display: flex; }
+
+.track-save-btn,
+.track-clear-btn {
+    margin-right: 5px;
+}
+.edit-line:not(:last-child) {
+    margin-bottom: 5px;
+}
+
+.edit-alignment {
+    display: flex;
+    margin: 0 5px;
+}
+
+.edit-issue,
+.edit-start,
+.edit-duration { 
+    text-align: center;
+}
+.edit-issue, .edit-duration {
+    flex: 0 0 60px;
+}
+.edit-start { 
+    min-width: 0px;
+    margin-left: 10px;
+}

@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+    <title>nxTrack</title>
+    <script src="../lib/vue@2.6.11.js"></script>
+    <script src="../lib/moment.min.js"></script>
+    <script src="../lib/moment-duration-format.min.js"></script>
+    <script src="../background/utils.js"></script>
+    <script src="../background/jira-api.js"></script>
+    <script src="globals.js"></script>
+    <script src="mixins.js"></script>
+    <script src="components/track-editor.js"></script>
+    <script src="components/track-timeline.js"></script>
+    <script src="components/track-focused.js"></script>
+    <script src="components/track-history.js"></script>
+    <script src="components/track-settings.js"></script>
+    <script src="popup.js"></script>
+    <link rel="stylesheet" href="../styles/material-icons.css" type="text/css">
+    <link rel="stylesheet" href="popup.css" type="text/css">
+    <link rel="stylesheet" href="components/track-editor.css" type="text/css">
+    <link rel="stylesheet" href="components/track-timeline.css" type="text/css">
+    <link rel="stylesheet" href="components/track-focused.css" type="text/css">
+    <link rel="stylesheet" href="components/track-history.css" type="text/css">
+    <link rel="stylesheet" href="components/track-settings.css" type="text/css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <div class="track-input-container">
+                <input class="comment-input" v-model="comment" @keyup.13="startTracking()" placeholder="# Comment" autofocus>
+                <button class="icon-btn track-start" @click="startTracking()" title="Click to start tracking">
+                    <span class="material-icons">play_arrow</span>
+                </button>
+            </div>
+            <main>
+                <div class="empty-track" v-if="!current.duration">
+                    No tracking
+                </div>
+                <div class="current-track" v-else :class="{highlighted: highlighted}">
+                    <span class="issue-key clickable" v-if="current.parentIssue" @click="openIssue(current.parentIssue)" :title="current.parentSummary">
+                        {{ current.parentIssue }} /
+                    </span>
+                    <span class="issue-key clickable" v-if="current.issue" @click="openIssue(current.issue)" :title="current.summary">
+                        {{ current.issue }}
+                    </span>
+                    <span class="comment-text" v-if="!current.issue && current.comment" :title="current.comment">
+                        # {{ current.comment }}
+                    </span>
+                    <button class="icon-btn track-stop" @click="stopTracking" title="Click to stop tracking">
+                        <span class="material-icons">timer</span>
+                    </button>
+                    <span class="track-duration" :title="'Started at ' + current.start">
+                        {{ current.duration }}
+                    </span>
+                </div>
+                <div class="issue-summary" v-if="current.summary">
+                    {{ current.summary }} <span v-if="current.issue && current.comment"># {{current.comment}}</span>
+                </div>
+                <track-editor v-if="current.duration" index="-1"></track-editor>
+            </main>
+            <track-timeline :history="history" :current="current" :settings="settings"></track-timeline>
+        </header>
+        <nav class="tabs">
+            <button class="tab clickable" :class="{'active': tab === 1}" @click="selectTab(1)">
+                <span class="material-icons md-18">gps_fixed</span>&nbsp;Focus
+            </button>
+            <button class="tab clickable" :class="{'active': tab === 2}" @click="selectTab(2)">
+                <span class="material-icons md-18">history</span>&nbsp;History
+            </button>
+            <button class="tab tab-min clickable" :class="{'active': tab === 3}" @click="selectTab(3)" title="Settings">
+                <span class="material-icons md-18">settings</span>
+            </button>
+        </nav>
+        <section class="tab-content" v-if="tab === 1">
+            <track-focused :focused="focused" :current="current"></track-focused>
+        </section>
+        <section class="tab-content" v-if="tab === 2">
+            <track-history :history="history" :fuck="issuePage"></track-history>
+        </section>
+        <section class="tab-content" v-if="tab === 3">
+            <track-settings :settings="settings"></track-settings>
+        </section>
+    </div>
+</body>
+</html>
