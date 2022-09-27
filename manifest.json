@@ -20,7 +20,7 @@
     "persistent": false
   },
   "content_scripts": [{
-    "matches": ["https://nexiuslearning.atlassian.net/*"],
+    "matches": ["https://webshippy.atlassian.net/*"],
     "css": [
       "styles/material-icons.css",
       "styles/track-control.css"

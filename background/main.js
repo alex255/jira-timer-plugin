@@ -140,7 +140,7 @@ function assignIssue(issue) {
 function defaultSettings() {
     if (Object.keys(settings).length === 0 || settings.jiraUrl.length === 0) {
         storage.set({settings: {
-            jiraUrl: 'https://nexiuslearning.atlassian.net',
+            jiraUrl: 'https://webshippy.atlassian.net',
             targetTime: '8h'
         }});
     }

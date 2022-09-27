@@ -3,7 +3,7 @@
 const storage = chrome.storage.local;
 const tabs = chrome.tabs;
 const sendMessage = chrome.runtime.sendMessage;
-const issueBaseUrl = 'https://nexiuslearning.atlassian.net/browse/';
+const issueBaseUrl = 'https://webshippy.atlassian.net/browse/';
 const RELATIVE_MODIFIER_REGEX = /^- ?(\d+h ?)?(\d+m ?)?((\d+h ?)|(\d+m ?))/;
 const START_MODIFIER_REGEX = /^@ ?((\d{1,2}):(\d{1,2})) ?/;
 
